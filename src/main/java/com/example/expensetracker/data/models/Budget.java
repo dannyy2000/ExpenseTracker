@@ -21,4 +21,6 @@ public class Budget {
     private LocalDate endDate;
     @Enumerated(value = EnumType.STRING)
     private Currency currency;
+    @ManyToOne
+    private Category category;
 }

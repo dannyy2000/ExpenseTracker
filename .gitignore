@@ -18,6 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
+C:\Users\user\ExpenseTracker\src\main\resources\secrets.properties
 
 ### NetBeans ###
 /nbproject/private/

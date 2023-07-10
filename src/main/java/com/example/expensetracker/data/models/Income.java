@@ -1,9 +1,6 @@
 package com.example.expensetracker.data.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,4 +18,6 @@ public class Income {
     private Long id;
     private BigDecimal amount;
     private LocalDate date;
+    @Enumerated(value = EnumType.STRING)
+    private Currency currency;
 }
