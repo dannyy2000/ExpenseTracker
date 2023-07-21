@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333333;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <title>Welcome</title>
+</head>
+<body>
+<div class="container">
+  <h2>Thank you for choosing Xpress!</h2>
+  <p>Hi <span th:text="${email}"/>,</p>
+  <p>Please copy the code below activate your account:</p>
+  <p><span th:text="${token}"/></p>
+</div>
+</body>
+</html>

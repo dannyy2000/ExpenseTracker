@@ -1,5 +1,6 @@
 package com.example.expensetracker.data.models;
 
+import com.example.expensetracker.enums.Currency;
 import jakarta.persistence.*;
 import lombok.*;
 
