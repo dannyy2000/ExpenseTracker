@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+C:\Users\user\ExpenseTracker\src\main\resources\secrets.properties
 
 ### STS ###
 .apt_generated
@@ -18,7 +19,8 @@ target/
 *.iws
 *.iml
 *.ipr
-C:\Users\user\ExpenseTracker\src\main\resources\secrets.properties
+src/main/resources/secrets.properties
+
 
 ### NetBeans ###
 /nbproject/private/
