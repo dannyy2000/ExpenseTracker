@@ -7,10 +7,10 @@ public class Message {
     public static final String EMAIL_FOUND = "User already exist";
     public static final String LOGIN_FAILED = "Invalid Login Details";
     public static final String LOGIN_SUCCESS = "Login successful";
-    public static final String AUTH_TOKEN_NOT_VALID = "Authentication token not valid";
-    public static final String AUTH_TOKEN_NOT_FOUND = "Authentication token not found";
-    public static final String AUTH_TOKEN_ALREADY_CONFIRMED = "Authentication token already confirmed";
-    public static final String AUTH_TOKEN_EXPIRED = "Authentication token already expired";
+    public static final String AUTH_OTP_NOT_VALID = "Authentication otp not valid";
+    public static final String AUTH_OTP_NOT_FOUND = "Authentication otp not found";
+    public static final String AUTH_OTP_ALREADY_CONFIRMED = "Authentication otp already confirmed";
+    public static final String AUTH_OTP_EXPIRED = "Authentication otp already expired";
 
 
 }
