@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class AuthOtp {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +26,10 @@ public class AuthOtp {
     private String recipient;
     private LocalDateTime confirmedAt;
 
+    public AuthOtp( String otpValue, LocalDateTime creationTime, LocalDateTime expiryTime, String recipient) {
+        this.otpValue = otpValue;
+        this.creationTime = creationTime;
+        this.expiryTime = expiryTime;
+        this.recipient = recipient;
+    }
 }

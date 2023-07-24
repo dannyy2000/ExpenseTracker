@@ -1,9 +1,12 @@
 package com.example.expensetracker.services.interfaces;
 
-import com.example.expensetracker.data.dto.request.RegisterRequest;
-import com.example.expensetracker.data.dto.response.RegisterResponse;
+import com.example.expensetracker.data.models.AppUser;
 
 public interface AppUserService {
 
-//    RegisterResponse registerUser(RegisterRequest registerRequest);
+    void saveUser(AppUser appUser);
+
+    AppUser findUserByEmail(String email);
+
+
 }

@@ -7,9 +7,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterResponse {
+public class TokenResponse {
 
-    private Long id;
-    private String message;
-
+    private String accessToken;
+    private String refreshToken;
 }
