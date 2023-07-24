@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AuthOtpRepository extends JpaRepository<AuthOtp,Long> {
 
-    Optional<AuthOtp> findByOtp(String otp);
+    Optional<AuthOtp> findByOtpValue(String otpValue);
 }

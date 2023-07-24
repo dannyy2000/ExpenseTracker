@@ -26,14 +26,14 @@ public class AuthOtpServiceImpl implements AuthOtpService {
 
     @Override
     public Optional<AuthOtp> checkOtp(String otp) {
-        return authOtpRepository.findByOtp(otp);
+        return authOtpRepository.findByOtpValue(otp);
     }
 
     @Override
     public void setConfirmedAt(String otp) {
 
         if (isValidOtp(otp)) {
-            AuthOtp authOtp = authOtpRepository.findByOtp(otp)
+            AuthOtp authOtp = authOtpRepository.findByOtpValue(otp)
                     .orElseThrow(() -> new OtpValidationException(AUTH_OTP_NOT_VALID));
 
             authOtp.setConfirmedAt(LocalDateTime.now());
@@ -43,6 +43,6 @@ public class AuthOtpServiceImpl implements AuthOtpService {
 
 
     private boolean isValidOtp(String otp){
-       return authOtpRepository.findByOtp(otp).isPresent();
+       return authOtpRepository.findByOtpValue(otp).isPresent();
     }
 }
