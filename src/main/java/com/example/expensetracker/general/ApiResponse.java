@@ -1,18 +1,26 @@
 package com.example.expensetracker.general;
 
-import com.example.expensetracker.enums.ResponseMessage;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.expensetracker.enums.Status;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class ApiResponse {
 
-    private boolean success;
-    private ResponseMessage message;
+    private String message;
+    private Status status;
     private int statusCode;
+
+
+    public ApiResponse(String message, Status status){
+        this.message = message;
+        this.status = status;
+    }
+
+    public ApiResponse(Status status){
+        this.status = status;
+    }
 }

@@ -20,17 +20,12 @@ public class AuthOtp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "token_id")
 
-    private Long id;
+    private String id;
     private String otpValue;
     private LocalDateTime creationTime = LocalDateTime.now();
-    private LocalDateTime expiryTime = creationTime.plusMinutes (20);
-    private String recipient;
-    private LocalDateTime confirmedAt;
-
-    public AuthOtp( String otpValue, LocalDateTime creationTime, LocalDateTime expiryTime, String recipient) {
-        this.otpValue = otpValue;
-        this.creationTime = creationTime;
-        this.expiryTime = expiryTime;
-        this.recipient = recipient;
+    private LocalDateTime expiryTime;
+    private boolean used;
+    public boolean isExpired(){
+        return creationTime.isAfter(expiryTime);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.expensetracker.enums;
 
-public enum ResponseMessage {
+public enum Status {
 
     SENT,
     CONFIRMED,
@@ -8,5 +8,9 @@ public enum ResponseMessage {
     REJECTED,
     NO_CONTENT,
     SUCCESS,
-    CREATED
+    CREATED,
+
+    BAD_REQUEST,
+
+    INTERNAL_SERVER_ERROR
 }

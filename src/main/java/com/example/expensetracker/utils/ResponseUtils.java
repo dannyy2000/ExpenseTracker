@@ -1,6 +1,6 @@
 package com.example.expensetracker.utils;
 
-import com.example.expensetracker.enums.ResponseMessage;
+import com.example.expensetracker.enums.Status;
 import com.example.expensetracker.general.ApiResponse;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ public class ResponseUtils {
     public static ApiResponse getSuccessResponse(){
        return ApiResponse.builder()
                 .success(true)
-                .message(ResponseMessage.SUCCESS)
+                .message(Status.SUCCESS)
                 .statusCode(200)
                 .build();
     }
@@ -18,7 +18,7 @@ public class ResponseUtils {
     public static ApiResponse getFailedResponse(){
         return ApiResponse.builder()
                 .success(false)
-                .message(ResponseMessage.UNAUTHORIZED)
+                .message(Status.UNAUTHORIZED)
                 .statusCode(401)
                 .build();
     }
@@ -26,7 +26,7 @@ public class ResponseUtils {
     public static ApiResponse getConfirmedResponse(){
         return ApiResponse.builder()
                 .success(true)
-                .message(ResponseMessage.CONFIRMED)
+                .message(Status.CONFIRMED)
                 .statusCode(200)
                 .build();
 
@@ -35,7 +35,7 @@ public class ResponseUtils {
     public static ApiResponse getCreatedResponse(){
         return ApiResponse.builder()
                 .success(true)
-                .message(ResponseMessage.CREATED)
+                .message(Status.CREATED)
                 .statusCode(200)
                 .build();
 
