@@ -1,10 +1,17 @@
 package com.example.expensetracker.services.impl;
 import com.example.expensetracker.data.models.AppUser;
 import com.example.expensetracker.data.repositories.AppUserRepository;
+import com.example.expensetracker.exception.UserNotFoundException;
 import com.example.expensetracker.services.interfaces.AppUserService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+import static com.example.expensetracker.general.Message.EMAIL_NOT_FOUND;
 
 @Service
 @Slf4j
@@ -20,7 +27,16 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUser findUserByEmail(String email) {
-        return appUserRepository.findUserByEmail(email);
+    public AppUser findUserByEmail(@NotBlank @NotEmpty String email) {
+        Optional<AppUser> foundUserEmail = appUserRepository.findUserByEmail(email);
+
+        if(foundUserEmail.isEmpty()){
+            throw new UserNotFoundException(EMAIL_NOT_FOUND);
+        }
+
+        return foundUserEmail.get();
+
     }
+
+
 }

@@ -12,5 +12,9 @@ public enum Status {
 
     BAD_REQUEST,
 
+    NOT_FOUND,
+
+    FORBIDDEN,
+
     INTERNAL_SERVER_ERROR
 }

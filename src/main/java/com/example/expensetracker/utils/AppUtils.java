@@ -27,7 +27,7 @@ public class AppUtils {
     public EmailNotificationRequest buildMail(String email, String token){
         EmailNotificationRequest request = new EmailNotificationRequest();
 
-        request.getRecipients().add(new Recipient(email));
+        request.setRecipients(email);
 
         Context context = new Context();
         context.setVariables(Map.of("email",email,"token",token));

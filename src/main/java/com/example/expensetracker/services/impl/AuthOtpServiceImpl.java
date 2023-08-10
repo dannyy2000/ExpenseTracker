@@ -46,8 +46,8 @@ public class AuthOtpServiceImpl implements AuthOtpService {
             return new GenerateOtpResponse(
                     "Otp generated successfully",
                     Status.SUCCESS,
-                    otp.getOtpValue(),
-                    otp.getId());
+                    otp.getId(),
+                    otp.getOtpValue());
 
         }catch (OtpGenerationException e){
             return new GenerateOtpResponse(

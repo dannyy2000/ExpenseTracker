@@ -1,8 +1,10 @@
 package com.example.expensetracker.data.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,5 +27,7 @@ public class AppUser {
     private List<Budget> budgets;
     @OneToMany
     private List<Expense> expenses;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+    private Date createdAt;
 
 }

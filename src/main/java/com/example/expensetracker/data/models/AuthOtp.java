@@ -20,7 +20,7 @@ public class AuthOtp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "token_id")
 
-    private String id;
+    private Long id;
     private String otpValue;
     private LocalDateTime creationTime = LocalDateTime.now();
     private LocalDateTime expiryTime;

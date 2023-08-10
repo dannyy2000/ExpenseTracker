@@ -13,7 +13,7 @@ import java.util.List;
 public class EmailNotificationRequest {
 
     private final Sender sender = new Sender("Tracker","noreply@Tracker.co.uk");
-    private List<Recipient> recipients = new ArrayList<>();
+    private String recipients;
     private final String subject = "welcome to Tracker";
     private String htmlContent;
 

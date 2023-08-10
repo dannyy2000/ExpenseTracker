@@ -4,7 +4,7 @@ import com.example.expensetracker.enums.Status;
 import com.example.expensetracker.general.ApiResponse;
 import lombok.*;
 
-@Builder
+
 @Getter
 @Setter
 @AllArgsConstructor
