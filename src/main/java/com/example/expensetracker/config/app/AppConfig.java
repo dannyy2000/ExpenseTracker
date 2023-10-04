@@ -8,14 +8,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Value("{mail.api.key}")
-    private String mailApiKey;
-    @Value("{sendinblue.mail.url}")
-    private String mailUrl;
+    @Value("${spring.mail.host}")
+    private String mailHost;
+    @Value("${spring.mail.port}")
+    private String mailPort;
+    @Value("${spring.mail.username}")
+    private String mailUsername;
+    @Value("${spring.mail.password}")
+    private String mailPassword;
+
 
 
     @Bean
     public MailConfiguration mailConfiguration(){
-        return new MailConfiguration(mailApiKey,mailUrl);
+        return new MailConfiguration(mailHost,mailPort,mailUsername,mailPassword);
     }
 }

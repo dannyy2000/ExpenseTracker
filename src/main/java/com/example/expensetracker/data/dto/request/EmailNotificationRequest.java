@@ -1,5 +1,7 @@
 package com.example.expensetracker.data.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -11,10 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class EmailNotificationRequest {
-
-    private final Sender sender = new Sender("Tracker","noreply@Tracker.co.uk");
+    @NotNull(message = "This field cannot be null")
+    @NotBlank(message = "This field cannot be blank")
     private String recipients;
     private final String subject = "welcome to Tracker";
-    private String htmlContent;
+    @NotNull(message = "This field cannot be null")
+    @NotBlank(message = "This field cannot be blank")
+    private String text;
 
 }

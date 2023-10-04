@@ -24,16 +24,16 @@ public class AppUtils {
         return String.valueOf(secureRandom.nextInt(max));
     }
 
-    public EmailNotificationRequest buildMail(String email, String token){
-        EmailNotificationRequest request = new EmailNotificationRequest();
-
-        request.setRecipients(email);
-
-        Context context = new Context();
-        context.setVariables(Map.of("email",email,"token",token));
-
-        String content = templateEngine.process("Activate",context);
-        request.setHtmlContent(content);
-        return request;
-    }
+//    public EmailNotificationRequest buildMail(String email, String token){
+//        EmailNotificationRequest request = new EmailNotificationRequest();
+//
+//        request.setRecipients(email);
+//
+//        Context context = new Context();
+//        context.setVariables(Map.of("email",email,"token",token));
+//
+//        String content = templateEngine.process("Activate",context);
+//        request.setHtmlContent(content);
+//        return request;
+//    }
 }

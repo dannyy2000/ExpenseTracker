@@ -9,7 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MailConfiguration {
 
-    private String apiKey;
-    private String mailUrl;
+    private String mailHost;
+    private String mailPort;
+    private String mailUsername;
+    private String mailPassword;
 
 }

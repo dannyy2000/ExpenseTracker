@@ -1,11 +1,13 @@
 package com.example.expensetracker.data.models;
 
+import com.example.expensetracker.enums.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -19,8 +21,11 @@ public class AppUser {
     private Long id;
     private String firstName;
     private String lastName;
+    private Role role;
     private String email;
     private String password;
+    private Set<Role> roles;
+    private boolean isEnabled;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Income> incomeList;
     @OneToMany(cascade = CascadeType.ALL)
