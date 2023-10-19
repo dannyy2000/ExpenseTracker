@@ -2,6 +2,7 @@ package com.example.expensetracker.data.models;
 
 import com.example.expensetracker.enums.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +16,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppUser {
+public class  AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -30,7 +31,8 @@ public class AppUser {
     private List<Income> incomeList;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Budget> budgets;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Expense> expenses;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private Date createdAt;

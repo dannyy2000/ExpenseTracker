@@ -10,5 +10,7 @@ public interface AppUserService {
 
     AppUser findUserByEmail(String email);
 
+    Optional<AppUser> getCurrentUser();
+
 
 }

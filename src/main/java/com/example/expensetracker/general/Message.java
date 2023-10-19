@@ -18,6 +18,8 @@ public class Message {
     public static final java.lang.String AUTH_OTP_ALREADY_CONFIRMED = "Authentication otp already confirmed";
     public static final java.lang.String AUTH_OTP_EXPIRED = "Authentication otp already expired";
 
+    public static final String AUTH_FAILED = "User is not authenticated";
+
     public static final java.lang.String AUTH_OTP_NOT_GENERATED = "Otp cannot be generated";
 
 

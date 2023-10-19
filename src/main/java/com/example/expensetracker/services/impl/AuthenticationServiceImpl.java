@@ -72,10 +72,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .createdAt(new Date())
                     .role(Role.USER)
                     .build();
+            log.info("this is the details{}",appUser.getLastName());
             appUserRepository.save(appUser);
+            log.info("After kinin{}",appUser.getFirstName());
 
             GenerateOtpResponse otpResponse = authOtpService.generateOtp();
             String otp = otpResponse.getOtp();
+            log.info("This is ur opt{}",otp);
 
             EmailNotificationRequest emailNotificationRequest = new EmailNotificationRequest();
             emailNotificationRequest.setRecipients(signUpRequest.getEmail());
@@ -98,14 +101,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public ApiResponse<?> login(LoginRequest loginRequest) {
         try {
-            AppUser user = appUserService.findUserByEmail(loginRequest.getEmail());
-            log.info("This is the user {}",user.getEmail());
+            Optional<AppUser> user = appUserRepository.findUserByEmail(loginRequest.getEmail());
+            log.info("This is the user {}",user.get().getEmail());
 
-            if (!user.isEnabled()) {
+            if (!user.get().isEnabled()) {
                 throw new UserNotEnabledException("User is not enabled");
             }
 
-            boolean isPassword = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
+            boolean isPassword = passwordEncoder.matches(loginRequest.getPassword(), user.get().getPassword());
             if (!isPassword) {
                 throw new InvalidPasswordException("Password does not match");
             }
@@ -117,12 +120,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             log.info("Security kinikankinikan {}",SecurityContextHolder.getContext().getAuthentication());
 
             UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();
+            log.info("this is the user principal{}",userDetails.getEmail());
 
-            String jwt = jwtProvider.generateToken(userDetails);
+            String jwt = jwtProvider.generateToken(user.get());
+            log.info("This is the jwt{}",jwt);
 
             return new LoginResponseDto(LOGIN_SUCCESS,
                     Status.SUCCESS,
-                    jwt, refreshTokenService.generateRefreshToken(user.getId()).getToken());
+                    jwt, refreshTokenService.generateRefreshToken(user.get().getId()).getToken());
         } catch (UserNotEnabledException | InvalidPasswordException | AuthenticationException e) {
             return new LoginResponseDto(e.getLocalizedMessage(), Status.BAD_REQUEST);
         }
