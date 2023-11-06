@@ -29,12 +29,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import static com.example.expensetracker.general.Message.*;
 
@@ -56,6 +58,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
+    public  static  UserPrincipal userPrincipal;
 
     @Override
     public ApiResponse<?> register(SignUpRequest signUpRequest) {
@@ -119,8 +122,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("Security kinikankinikan {}",SecurityContextHolder.getContext().getAuthentication());
 
-            UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();
-            log.info("this is the user principal{}",userDetails.getEmail());
+            userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            log.info("this is the user principal{}",userPrincipal.getEmail());
+
+//            SecurityContext securityContext = SecurityContextHolder.getContext();
+//            CompletableFuture.runAsync(()-> {
+//                SecurityContextHolder.setContext(securityContext);
+//            });
 
             String jwt = jwtProvider.generateToken(user.get());
             log.info("This is the jwt{}",jwt);

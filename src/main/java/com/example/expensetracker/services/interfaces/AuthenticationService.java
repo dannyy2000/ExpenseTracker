@@ -3,6 +3,7 @@ import com.example.expensetracker.data.dto.request.LoginRequest;
 import com.example.expensetracker.data.dto.request.SignUpRequest;
 import com.example.expensetracker.data.dto.request.VerifyUserRequest;
 import com.example.expensetracker.general.ApiResponse;
+import com.example.expensetracker.security.UserPrincipal;
 
 
 public interface AuthenticationService {

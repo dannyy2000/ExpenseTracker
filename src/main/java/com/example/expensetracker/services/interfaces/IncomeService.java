@@ -8,7 +8,7 @@ public interface IncomeService {
 
     ApiResponse<?> addIncome(IncomeRequest incomeRequest) ;
 
-    ApiResponse<?> editIncome(IncomeRequest incomeRequest);
+    ApiResponse<?> editIncome(Long id,IncomeRequest incomeRequest);
 
     void deleteIncome(Long id);
 }

@@ -7,10 +7,7 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.apache.tomcat.websocket.AuthenticationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/income")
@@ -28,5 +25,17 @@ public class IncomeController extends Controller{
     @PermitAll
     public ApiResponse<?> addIncome(@Valid @RequestBody IncomeRequest incomeRequest)  {
         return responseWithUpdatedHttpStatus(incomeService.addIncome(incomeRequest));
+    }
+
+    @PutMapping("/edit")
+    @PermitAll
+    public ApiResponse<?> editIncome(@Valid @RequestParam Long id, @Valid @RequestBody IncomeRequest incomeRequest){
+        return responseWithUpdatedHttpStatus(incomeService.editIncome(id,incomeRequest));
+    }
+
+    @DeleteMapping("/delete")
+    @PermitAll
+    public void deleteIncome(@RequestParam Long id){
+        incomeService.deleteIncome(id);
     }
 }
