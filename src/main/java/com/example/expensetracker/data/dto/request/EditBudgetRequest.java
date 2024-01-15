@@ -1,6 +1,6 @@
 package com.example.expensetracker.data.dto.request;
 
-import com.example.expensetracker.enums.Category;
+import com.example.expensetracker.enums.Categories;
 import com.example.expensetracker.enums.Currency;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -19,6 +19,6 @@ public class EditBudgetRequest {
     @NotNull(message = "field name cannot be null")
     private Currency currency;
     @NotNull(message = "field name cannot be null")
-    private Category category;
+    private Categories category;
 
 }

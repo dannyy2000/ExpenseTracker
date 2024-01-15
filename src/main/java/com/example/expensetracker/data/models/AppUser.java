@@ -29,8 +29,8 @@ public class  AppUser {
     private boolean isEnabled;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Income> incomeList;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Budget> budgets;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Budget> budgets;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Expense> expenses;

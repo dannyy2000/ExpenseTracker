@@ -22,6 +22,8 @@ public class Expense {
     private LocalDate date;
     @Enumerated(value=EnumType.STRING)
     private Currency currency;
+//    @ManyToOne
+//    private Budget budget;
     @ManyToOne
-    private Budget budget;
+    private Month month;
 }

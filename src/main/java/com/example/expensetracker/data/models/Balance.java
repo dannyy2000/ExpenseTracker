@@ -1,11 +1,9 @@
 package com.example.expensetracker.data.models;
 
-import com.example.expensetracker.enums.Currency;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 @Builder
@@ -13,14 +11,12 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Income {
+public class Balance {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private BigDecimal amount;
-    private LocalDate date;
-    @Enumerated(value = EnumType.STRING)
-    private Currency currency;
     @ManyToOne
-    private Month month;
+     private Month month;
+
+    private BigDecimal balanceAmount;
 }
