@@ -1,10 +1,12 @@
 package com.example.expensetracker.security;
 
+import com.example.expensetracker.data.models.AppUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -20,12 +22,15 @@ import java.util.function.Function;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
+
 public class JwtProvider {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Value("${jwt.expiration}")
     private Long jwtExpiration;
+
 
     public boolean isTokenValid(String token){
         return false;
@@ -37,7 +42,7 @@ public class JwtProvider {
                 .setSubject(userPrincipal.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(Instant.now().plusMillis(jwtExpiration)))
-                .signWith(SignatureAlgorithm.HS512, getSigningKey())
+                .signWith(getSigningKey(),SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -45,6 +50,8 @@ public class JwtProvider {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 
     public<T> T extractClaims(String token, Function<Claims,T> claimsResolver){
         final Claims claims = extractAllClaims(token);
@@ -55,16 +62,18 @@ public class JwtProvider {
         return extractClaims(token,Claims::getSubject);
     }
 
-    public String generateToken(Map<String,Object> extractClaims,UserDetails userDetails){
-        return Jwts.builder().setClaims(extractClaims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .signWith(SignatureAlgorithm.HS256, getSigningKey()).compact();
+    public String generateToken(Map<String,Object> extractClaims,AppUser user){
+        log.info("This is the key{}",getSigningKey());
+        return Jwts.builder()
+                .setClaims(extractClaims)
+                .setSubject(user.getEmail())
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plusSeconds(jwtExpiration)))
+                .signWith(getSigningKey(),SignatureAlgorithm.HS256).compact();
     }
 
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>(),userDetails);
+    public String generateToken(AppUser user){
+        return generateToken(new HashMap<>(),user);
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails){
@@ -81,7 +90,6 @@ public class JwtProvider {
     }
 
     public Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJwt(token).getBody();
-
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJwt(token).getBody();
     }
 }

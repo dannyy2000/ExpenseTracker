@@ -2,6 +2,7 @@ package com.example.expensetracker.security;
 
 import com.example.expensetracker.data.models.AppUser;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class UserPrincipal implements UserDetails {
 
     private Long id;
@@ -22,6 +24,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+//    private AppUser user;
     public static UserDetails create(AppUser user){
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
         return new UserPrincipal(user.getId(),user.isEnabled(),user.getEmail(),user.getPassword(),authorities);
@@ -29,7 +32,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return  authorities;
     }
 
     @Override
