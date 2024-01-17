@@ -3,6 +3,7 @@ package com.example.expensetracker.services.impl;
 import com.example.expensetracker.data.dto.request.IncomeRequest;
 import com.example.expensetracker.data.models.AppUser;
 import com.example.expensetracker.data.models.Income;
+import com.example.expensetracker.data.models.Month;
 import com.example.expensetracker.data.repositories.AppUserRepository;
 import com.example.expensetracker.data.repositories.IncomeRepository;
 import com.example.expensetracker.enums.Status;
@@ -11,6 +12,7 @@ import com.example.expensetracker.exception.IncomeException;
 import com.example.expensetracker.general.ApiResponse;
 import com.example.expensetracker.services.interfaces.AppUserService;
 import com.example.expensetracker.services.interfaces.IncomeService;
+import com.example.expensetracker.services.interfaces.MonthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,10 @@ public class IncomeServiceImpl implements IncomeService {
     private final AppUserService appUserService;
 
     private final AppUserRepository appUserRepository;
+    private final MonthService monthService;
 
     @Override
-    public ApiResponse<?> addIncome(IncomeRequest incomeRequest) {
+    public ApiResponse<?> addIncome(String monthName,IncomeRequest incomeRequest) {
         try {
 
             Optional<AppUser> optionalAppUser = appUserService.getCurrentUser();
@@ -45,10 +48,12 @@ public class IncomeServiceImpl implements IncomeService {
 
             AppUser currentUser = optionalAppUser.get();
             log.info("This is the the current user{}", currentUser.getFirstName());
+            Month month = monthService.getOrCreateMonth(monthName);
 
             Income income = Income.builder()
                     .amount(incomeRequest.getAmount())
                     .currency(incomeRequest.getCurrency())
+                    .month(month)
                     .date(LocalDate.now())
                     .build();
 

@@ -1,5 +1,6 @@
 package com.example.expensetracker.data.models;
 
+import com.example.expensetracker.enums.Categories;
 import com.example.expensetracker.enums.Currency;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,4 +27,7 @@ public class Expense {
 //    private Budget budget;
     @ManyToOne
     private Month month;
+
+    @Enumerated(value = EnumType.STRING)
+    private Categories categories;
 }

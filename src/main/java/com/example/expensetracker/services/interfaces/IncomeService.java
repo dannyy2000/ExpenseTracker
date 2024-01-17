@@ -6,7 +6,7 @@ import org.apache.tomcat.websocket.AuthenticationException;
 
 public interface IncomeService {
 
-    ApiResponse<?> addIncome(IncomeRequest incomeRequest) ;
+    ApiResponse<?> addIncome(String monthName,IncomeRequest incomeRequest) ;
 
     ApiResponse<?> editIncome(Long id,IncomeRequest incomeRequest);
 

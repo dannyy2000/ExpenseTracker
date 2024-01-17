@@ -23,8 +23,8 @@ public class IncomeController extends Controller{
 
     @PostMapping("/add")
     @PermitAll
-    public ApiResponse<?> addIncome(@Valid @RequestBody IncomeRequest incomeRequest)  {
-        return responseWithUpdatedHttpStatus(incomeService.addIncome(incomeRequest));
+    public ApiResponse<?> addIncome(@Valid @RequestParam String monthName, @RequestBody IncomeRequest incomeRequest)  {
+        return responseWithUpdatedHttpStatus(incomeService.addIncome(monthName,incomeRequest));
     }
 
     @PutMapping("/edit")

@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MonthServiceImpl implements MonthService {
 
-    private MonthRepository monthRepository;
+    private final MonthRepository monthRepository;
 
 
     @Override

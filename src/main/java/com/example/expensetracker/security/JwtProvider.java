@@ -42,7 +42,7 @@ public class JwtProvider {
                 .setSubject(userPrincipal.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(Instant.now().plusMillis(jwtExpiration)))
-                .signWith(getSigningKey(),SignatureAlgorithm.HS512)
+                .signWith(SignatureAlgorithm.HS512, getSigningKey())
                 .compact();
     }
 
@@ -69,7 +69,7 @@ public class JwtProvider {
                 .setSubject(user.getEmail())
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plusSeconds(jwtExpiration)))
-                .signWith(getSigningKey(),SignatureAlgorithm.HS256).compact();
+                .signWith(SignatureAlgorithm.HS256, getSigningKey()).compact();
     }
 
     public String generateToken(AppUser user){
@@ -90,6 +90,6 @@ public class JwtProvider {
     }
 
     public Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJwt(token).getBody();
+        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJwt(token).getBody();
     }
 }
